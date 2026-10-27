@@ -29,7 +29,7 @@ Open http://localhost:3000.
 app/                    routes, layout, metadata (icon, OG image, robots, sitemap)
   api/contact/route.ts  POST endpoint for the "Get in touch" form
 components/             Ticker, Hero, About, ActionBar, ContactModal
-lib/site.ts             site-wide links and copy (contact email, title, description)
+lib/site.ts             site-wide links and copy (contact email, Behance URL, title, description)
 lib/contact.ts          form validation and sendContactMessage()
 public/images/          assets exported from Figma
 docs/superpowers/       design spec and implementation plan

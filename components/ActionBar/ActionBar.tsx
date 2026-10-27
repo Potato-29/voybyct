@@ -24,10 +24,10 @@ export default function ActionBar() {
           <Image className={styles.arrow} src={arrow} alt="" />
         </EmailLink>
       )}
-      <EmailLink className={styles.action}>
+      <a className={styles.action} href={site.behanceUrl} target="_blank" rel="noopener noreferrer">
         check out our work
         <Image className={styles.arrow} src={arrow} alt="" />
-      </EmailLink>
+      </a>
       {site.contactFormEnabled && (
         <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       )}
