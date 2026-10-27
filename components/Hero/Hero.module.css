@@ -8,6 +8,11 @@
   color: var(--color-white);
 }
 
+.media {
+  position: absolute;
+  inset: 0;
+}
+
 .background {
   object-fit: cover;
   /* Keep the portal and figures in view (they sit ~48% across, ~62% down the image). */
@@ -58,9 +63,18 @@
     min-height: 0;
   }
 
-  /* Figma's crop: the figures stand just above the white strip. */
+  /* The wide image fills the band above the white strip; the colour behind the
+     strip (seen through its V cutout) continues the image's bottom edge. */
+  .hero {
+    background: #70060b;
+  }
+
+  .media {
+    bottom: calc(201 * var(--u));
+  }
+
   .background {
-    object-position: 50% 88%;
+    object-position: 50% 100%;
   }
 
   .content {
