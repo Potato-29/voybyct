@@ -10,16 +10,20 @@ import styles from "./Hero.module.css";
 const DESKTOP_MEDIA = "(min-width: 1024px)";
 
 export default function Hero() {
-  const common = { alt: "", fill: true, priority: true, sizes: "100vw" };
-  const {
-    props: { srcSet: wideSrcSet },
-  } = getImageProps({ ...common, src: heroWideImage });
-  const { props: imgProps } = getImageProps({ ...common, src: heroImage });
+  // Unoptimized: re-encoding smears the photos' film grain into blotches, and
+  // the exported files are already web-sized.
+  const { props: imgProps } = getImageProps({
+    src: heroImage,
+    alt: "",
+    fill: true,
+    priority: true,
+    unoptimized: true,
+  });
 
   return (
     <div className={styles.hero}>
       <picture className={styles.media}>
-        <source media={DESKTOP_MEDIA} srcSet={wideSrcSet} />
+        <source media={DESKTOP_MEDIA} srcSet={heroWideImage.src} />
         <img {...imgProps} alt="" className={styles.background} />
       </picture>
       <div className={styles.content}>
