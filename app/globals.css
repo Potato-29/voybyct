@@ -34,6 +34,9 @@ body {
 }
 
 body {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
   background: var(--color-white);
   color: var(--color-black);
   font-family: var(--font-body), system-ui, sans-serif;

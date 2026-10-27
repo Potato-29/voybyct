@@ -1,0 +1,13 @@
+.stage {
+  position: relative;
+  flex: 1 0 auto;
+}
+
+/* Desktop: a canvas with the Figma frame's proportions that also fills the viewport. */
+@media (min-width: 1024px) {
+  .stage {
+    container-type: inline-size;
+    /* Not aspect-ratio: with min-height it would widen the stage past the viewport. */
+    height: max(calc(100vw * 546 / 1200), calc(100svh - var(--ticker-height) - var(--actionbar-height)));
+  }
+}

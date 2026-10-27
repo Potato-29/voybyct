@@ -1,0 +1,81 @@
+/* Mobile/tablet: stacked layout. */
+.hero {
+  position: relative;
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-white);
+}
+
+.background {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 32px var(--gutter);
+}
+
+.wordmark {
+  margin: 0;
+  width: min(160px, 45vw);
+}
+
+.wordmark img {
+  width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.strip {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+/* Desktop: positioned to match the 1200px Figma frame. --u is one Figma pixel. */
+@media (min-width: 1024px) {
+  .hero {
+    --u: calc(100cqw / 1200);
+    position: absolute;
+    inset: 0 0 calc(9 * var(--u)) 0;
+    min-height: 0;
+  }
+
+  .content {
+    position: absolute;
+    inset: 0 0 calc(201 * var(--u)) 0;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 calc(100 * var(--u)) 0 calc(103 * var(--u));
+  }
+
+  .wordmark {
+    width: calc(122 * var(--u));
+  }
+
+  .tagline {
+    font-size: max(12px, calc(14 * var(--u)));
+  }
+
+  .strip {
+    position: absolute;
+    /* Overlap by 1px so sub-pixel rounding never shows a sliver of the hero below. */
+    bottom: -1px;
+    left: 0;
+  }
+}

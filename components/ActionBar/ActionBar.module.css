@@ -1,0 +1,53 @@
+.bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: var(--actionbar-height);
+  background: var(--color-black);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0 8px;
+  border: 0;
+  background: none;
+  color: var(--color-white);
+  font-size: max(10px, calc(11 * 100vw / 1200));
+  letter-spacing: 0.18em;
+  line-height: 1.33;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.action + .action {
+  border-left: 1px solid var(--color-white);
+}
+
+.action:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: -4px;
+}
+
+.arrow {
+  width: 1.6em;
+  height: 1.6em;
+  transition: transform 0.2s ease;
+}
+
+.action:hover .arrow,
+.action:focus-visible .arrow {
+  transform: translate(2px, 2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    transition: none;
+  }
+}

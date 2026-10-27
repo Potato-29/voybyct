@@ -1,0 +1,50 @@
+/* Mobile/tablet: flows below the hero. */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px var(--gutter) 32px;
+}
+
+.description {
+  margin: 0;
+  max-width: 34em;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.33;
+  text-transform: lowercase;
+}
+
+.symbols {
+  width: 113px;
+  height: auto;
+}
+
+/* Desktop: overlaid on the white strip, matching the Figma frame. */
+@media (min-width: 1024px) {
+  .about {
+    --u: calc(100cqw / 1200);
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .description {
+    position: absolute;
+    left: calc(111 * var(--u));
+    bottom: calc(28 * var(--u));
+    width: calc(412 * var(--u));
+    max-width: none;
+    font-size: max(10px, calc(10 * var(--u)));
+    text-align: justify;
+    pointer-events: auto;
+  }
+
+  .symbols {
+    position: absolute;
+    left: calc(976 * var(--u));
+    bottom: calc(128 * var(--u));
+    width: calc(113 * var(--u));
+  }
+}
