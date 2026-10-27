@@ -40,8 +40,8 @@ Design source: Figma file `ibQ44dnSfDhARHzcwV1ywO`, frame "Landing Page".
 ## Contact form
 
 The form is behind a feature flag. Unless `NEXT_PUBLIC_CONTACT_FORM_ENABLED=true` is set
-at build time, "Get in touch" opens an email to the studio (`site.email` in `lib/site.ts`)
-instead of the form.
+at build time, "Get in touch" emails the studio (`site.email` in `lib/site.ts`) instead:
+Gmail's compose window on desktop, `mailto:` (the mail app) on touch devices.
 
 The form posts to `/api/contact`, which validates the input and calls
 `sendContactMessage()` in `lib/contact.ts`. Delivery is **not connected yet**: until it is,

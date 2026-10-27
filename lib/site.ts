@@ -7,7 +7,7 @@ export const site = {
   // Placeholder until the production domain is set up.
   url: "https://voybyct.vercel.app",
   email: "voybyctstudio@gmail.com",
-  // "Get in touch" opens the contact form when "true", otherwise a mailto: link.
+  // "Get in touch" opens the contact form when "true", otherwise an email link.
   // Inlined at build time, so redeploy after changing it.
   contactFormEnabled: process.env.NEXT_PUBLIC_CONTACT_FORM_ENABLED === "true",
 } as const;

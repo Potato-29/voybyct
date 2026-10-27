@@ -5,6 +5,7 @@ import { useState } from "react";
 import arrow from "@/public/images/arrow-down-right.svg";
 import ContactModal from "@/components/ContactModal/ContactModal";
 import { site } from "@/lib/site";
+import EmailLink from "./EmailLink";
 import styles from "./ActionBar.module.css";
 
 export default function ActionBar() {
@@ -18,15 +19,15 @@ export default function ActionBar() {
           <Image className={styles.arrow} src={arrow} alt="" />
         </button>
       ) : (
-        <a className={styles.action} href={`mailto:${site.email}`}>
+        <EmailLink className={styles.action}>
           Get in touch
           <Image className={styles.arrow} src={arrow} alt="" />
-        </a>
+        </EmailLink>
       )}
-      <a className={styles.action} href={`mailto:${site.email}`}>
+      <EmailLink className={styles.action}>
         check out our work
         <Image className={styles.arrow} src={arrow} alt="" />
-      </a>
+      </EmailLink>
       {site.contactFormEnabled && (
         <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
       )}
