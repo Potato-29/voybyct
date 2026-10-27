@@ -10,7 +10,8 @@
 
 .background {
   object-fit: cover;
-  object-position: 50% 30%;
+  /* Keep the portal and figures in view (they sit ~48% across, ~62% down the image). */
+  object-position: 48% 70%;
 }
 
 .content {
@@ -55,6 +56,11 @@
     position: absolute;
     inset: 0 0 calc(9 * var(--u)) 0;
     min-height: 0;
+  }
+
+  /* Figma's crop: the figures stand just above the white strip. */
+  .background {
+    object-position: 50% 88%;
   }
 
   .content {

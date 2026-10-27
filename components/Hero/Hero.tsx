@@ -1,5 +1,5 @@
 import Image from "next/image";
-import heroImage from "@/public/images/hero.jpg";
+import heroImage from "@/public/images/hero.webp";
 import logoStrip from "@/public/images/logo-strip.png";
 import wordmark from "@/public/images/wordmark.png";
 import styles from "./Hero.module.css";

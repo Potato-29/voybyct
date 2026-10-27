@@ -11,13 +11,13 @@
 
   /* Layout */
   --ticker-height: 26px;
-  --actionbar-height: 44px;
+  --actionbar-height: 52px;
   --gutter: 16px;
 }
 
 @media (min-width: 768px) {
   :root {
-    --actionbar-height: 33px;
+    --actionbar-height: 40px;
     --gutter: 40px;
   }
 }
