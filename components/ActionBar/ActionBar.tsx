@@ -16,7 +16,7 @@ export default function ActionBar() {
         Get in touch
         <Image className={styles.arrow} src={arrow} alt="" />
       </button>
-      <a className={styles.action} href={site.behanceUrl} target="_blank" rel="noopener noreferrer">
+      <a className={styles.action} href={`mailto:${site.email}`}>
         check out our work
         <Image className={styles.arrow} src={arrow} alt="" />
       </a>

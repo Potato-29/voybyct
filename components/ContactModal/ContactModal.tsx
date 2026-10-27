@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { HONEYPOT_FIELD, MESSAGE_MAX, type ContactErrors } from "@/lib/contact";
+import { site } from "@/lib/site";
 import Field from "./Field";
 import styles from "./ContactModal.module.css";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const NOT_CONFIGURED = "The contact form isn't connected yet — please reach out on Behance for now.";
+const NOT_CONFIGURED = `The contact form isn't connected yet — please email us at ${site.email} for now.`;
 const GENERIC_ERROR = "Something went wrong sending your message. Please try again.";
 
 type Props = { open: boolean; onClose: () => void };

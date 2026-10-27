@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Stand-in for Fractul (commercial). Swap for next/font/local once the
-// licensed font files are added to app/fonts/.
-const bodyFont = Outfit({
+// Deuterium Variable (the Figma font), weight axis 100–900.
+const bodyFont = localFont({
+  src: "./fonts/DeuteriumVariable.woff2",
+  weight: "100 900",
   variable: "--font-body",
-  subsets: ["latin"],
 });
 
 // The icon and Open Graph image come from app/icon.png and app/opengraph-image.jpg.

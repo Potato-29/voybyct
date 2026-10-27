@@ -29,7 +29,7 @@ Open http://localhost:3000.
 app/                    routes, layout, metadata (icon, OG image, robots, sitemap)
   api/contact/route.ts  POST endpoint for the "Get in touch" form
 components/             Ticker, Hero, About, ActionBar, ContactModal
-lib/site.ts             site-wide links and copy (Behance URL, title, description)
+lib/site.ts             site-wide links and copy (contact email, title, description)
 lib/contact.ts          form validation and sendContactMessage()
 public/images/          assets exported from Figma
 docs/superpowers/       design spec and implementation plan
@@ -41,7 +41,7 @@ Design source: Figma file `ibQ44dnSfDhARHzcwV1ywO`, frame "Landing Page".
 
 The form posts to `/api/contact`, which validates the input and calls
 `sendContactMessage()` in `lib/contact.ts`. Delivery is **not connected yet**: until it is,
-the endpoint responds 503 and the form tells visitors to reach out on Behance.
+the endpoint responds 503 and the form tells visitors to email the studio instead.
 
 To enable it:
 
@@ -51,9 +51,7 @@ To enable it:
 
 ## Placeholders to replace
 
-- `lib/site.ts` → `behanceUrl` (currently the Behance homepage) and `url` (production domain).
-- `app/layout.tsx` → the body font is Outfit, standing in for the licensed **Fractul**.
-  Add the font files to `app/fonts/` and switch to `next/font/local`.
+- `lib/site.ts` → `url` (production domain).
 
 ## Deploying
 
