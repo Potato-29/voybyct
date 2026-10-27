@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VOYBYCT
 
-## Getting Started
+Landing page for VOYBYCT, a design studio — "an antidote to bland". It is live while the
+main website is being designed, and the codebase is set up to grow into that site.
 
-First, run the development server:
+Built with Next.js (App Router), TypeScript and CSS Modules. The page is statically
+generated; the only server code is the contact form endpoint.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script | What it does |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm test` | Vitest unit tests |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project layout
 
-## Learn More
+```
+app/                    routes, layout, metadata (icon, OG image, robots, sitemap)
+  api/contact/route.ts  POST endpoint for the "Get in touch" form
+components/             Ticker, Hero, About, ActionBar, ContactModal
+lib/site.ts             site-wide links and copy (Behance URL, title, description)
+lib/contact.ts          form validation and sendContactMessage()
+public/images/          assets exported from Figma
+docs/superpowers/       design spec and implementation plan
+```
 
-To learn more about Next.js, take a look at the following resources:
+Design source: Figma file `ibQ44dnSfDhARHzcwV1ywO`, frame "Landing Page".
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The form posts to `/api/contact`, which validates the input and calls
+`sendContactMessage()` in `lib/contact.ts`. Delivery is **not connected yet**: until it is,
+the endpoint responds 503 and the form tells visitors to reach out on Behance.
 
-## Deploy on Vercel
+To enable it:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Implement delivery inside `sendContactMessage()` (for example with [Resend](https://resend.com)).
+2. Set the environment variables from `.env.example` (`CONTACT_TO_EMAIL`, `RESEND_API_KEY`)
+   locally in `.env.local` and in the Vercel project settings.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Placeholders to replace
+
+- `lib/site.ts` → `behanceUrl` (currently the Behance homepage) and `url` (production domain).
+- `app/layout.tsx` → the body font is Outfit, standing in for the licensed **Fractul**.
+  Add the font files to `app/fonts/` and switch to `next/font/local`.
+
+## Deploying
+
+Import the GitHub repo into [Vercel](https://vercel.com/new) — no configuration is needed.
+Every push to `main` deploys to production; other branches get preview URLs.
