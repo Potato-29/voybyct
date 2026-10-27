@@ -5,7 +5,8 @@
   --color-text-muted: #676767;
   --color-accent: #f74203;
 
-  /* Typography. --font-body is set by next/font in app/layout.tsx. */
+  /* Typography. "fractul-variable" comes from the Adobe Fonts kit linked in app/layout.tsx. */
+  --font-body: "fractul-variable";
   --font-display: var(--font-body);
 
   /* Layout */

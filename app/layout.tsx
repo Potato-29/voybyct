@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Deuterium Variable (the Figma font), weight axis 100–900.
-const bodyFont = localFont({
-  src: "./fonts/DeuteriumVariable.woff2",
-  weight: "100 900",
-  variable: "--font-body",
-});
+// Adobe Fonts kit serving Fractul Variable (the Figma font) as "fractul-variable".
+// Manage the kit's allowed domains at fonts.adobe.com > Web Projects.
+const FONT_KIT_URL = "https://use.typekit.net/crv5whm.css";
 
 // The icon and Open Graph image come from app/icon.png and app/opengraph-image.jpg.
 export const metadata: Metadata = {
@@ -31,8 +27,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={bodyFont.variable}>
-      <body>{children}</body>
+    <html lang="en">
+      <body>
+        {/* React hoists this into <head>. */}
+        <link rel="stylesheet" href={FONT_KIT_URL} precedence="default" />
+        {children}
+      </body>
     </html>
   );
 }
