@@ -33,8 +33,10 @@ body {
   padding: 0;
 }
 
+/* The landing page is a single screen: no page scroll. */
 body {
-  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: var(--color-white);
