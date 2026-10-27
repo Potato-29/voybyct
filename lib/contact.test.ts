@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ContactNotConfiguredError,
+  HONEYPOT_FIELD,
   MESSAGE_MAX,
   isContactConfigured,
   sendContactMessage,
@@ -55,7 +56,12 @@ describe("validateContact", () => {
   });
 
   it("flags a filled honeypot as spam", () => {
-    expect(validateContact({ ...valid, company: "bot" })).toEqual({ ok: true, data: valid, isSpam: true });
+    expect(validateContact({ ...valid, [HONEYPOT_FIELD]: "bot" })).toEqual({ ok: true, data: valid, isSpam: true });
+  });
+
+  it("uses a honeypot name that browser autofill does not recognise", () => {
+    expect(HONEYPOT_FIELD).not.toMatch(/company|organi[sz]ation|name|email|phone|address|website$/i);
+    expect(validateContact({ ...valid, company: "Acme" })).toEqual({ ok: true, data: valid, isSpam: false });
   });
 });
 

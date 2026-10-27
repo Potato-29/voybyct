@@ -7,6 +7,9 @@ export type ValidationResult =
 type Env = Record<string, string | undefined>;
 
 export const MESSAGE_MAX = 5000;
+// Honeypot: hidden from people, filled in by naive bots. The name must not look like
+// anything browser autofill knows (e.g. "company"), or real visitors get flagged as spam.
+export const HONEYPOT_FIELD = "hp_confirm";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -32,8 +35,7 @@ export function validateContact(input: unknown): ValidationResult {
     errors.message = `Please keep your message under ${MESSAGE_MAX} characters.`;
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
-  // "company" is a honeypot: hidden from people, filled in by naive bots.
-  return { ok: true, data, isSpam: field(source, "company") !== "" };
+  return { ok: true, data, isSpam: field(source, HONEYPOT_FIELD) !== "" };
 }
 
 export class ContactNotConfiguredError extends Error {

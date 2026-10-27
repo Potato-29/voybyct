@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
-import { MESSAGE_MAX, type ContactErrors } from "@/lib/contact";
+import { HONEYPOT_FIELD, MESSAGE_MAX, type ContactErrors } from "@/lib/contact";
+import Field from "./Field";
 import styles from "./ContactModal.module.css";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -49,8 +50,14 @@ export default function ContactModal({ open, onClose }: Props) {
         return;
       }
       const body = await res.json().catch(() => ({}));
-      if (res.status === 400 && body.errors) setErrors(body.errors);
-      else setErrorMessage(res.status === 503 ? NOT_CONFIGURED : GENERIC_ERROR);
+      if (res.status === 400 && body.errors) {
+        setErrors(body.errors);
+        // Focus the first invalid field so its linked error message is announced.
+        const first = (["name", "email", "message"] as const).find((key) => body.errors[key]);
+        if (first) requestAnimationFrame(() => form.querySelector<HTMLElement>(`[name="${first}"]`)?.focus());
+      } else {
+        setErrorMessage(res.status === 503 ? NOT_CONFIGURED : GENERIC_ERROR);
+      }
       setStatus("error");
     } catch {
       setErrorMessage(GENERIC_ERROR);
@@ -86,19 +93,18 @@ export default function ContactModal({ open, onClose }: Props) {
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <Field label="Name" name="name" error={errors.name}>
-              <input id="name" name="name" type="text" autoComplete="name" required />
+              {(control) => <input {...control} type="text" autoComplete="name" required />}
             </Field>
             <Field label="Email" name="email" error={errors.email}>
-              <input id="email" name="email" type="email" autoComplete="email" required />
+              {(control) => <input {...control} type="email" autoComplete="email" required />}
             </Field>
             <Field label="Message" name="message" error={errors.message}>
-              <textarea id="message" name="message" rows={5} maxLength={MESSAGE_MAX} required />
+              {(control) => <textarea {...control} rows={5} maxLength={MESSAGE_MAX} required />}
             </Field>
 
-            {/* Honeypot: hidden from people, filled in by naive bots. */}
-            <div className="visually-hidden" aria-hidden="true">
-              <label htmlFor="company">Company</label>
-              <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+            {/* Honeypot: display:none so people and autofill skip it; naive bots fill it in. */}
+            <div hidden>
+              <input name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" />
             </div>
 
             {errorMessage && (
@@ -114,29 +120,5 @@ export default function ContactModal({ open, onClose }: Props) {
         )}
       </div>
     </dialog>
-  );
-}
-
-function Field({
-  label,
-  name,
-  error,
-  children,
-}: {
-  label: string;
-  name: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={styles.field} data-invalid={error ? "" : undefined}>
-      <label htmlFor={name}>{label}</label>
-      {children}
-      {error && (
-        <span className={styles.fieldError} id={`${name}-error`} role="alert">
-          {error}
-        </span>
-      )}
-    </div>
   );
 }

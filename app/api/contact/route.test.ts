@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ContactNotConfiguredError, sendContactMessage } from "@/lib/contact";
+import { ContactNotConfiguredError, HONEYPOT_FIELD, sendContactMessage } from "@/lib/contact";
 import { POST } from "./route";
 
 vi.mock("@/lib/contact", async (importOriginal) => ({
@@ -40,7 +40,7 @@ describe("POST /api/contact", () => {
   });
 
   it("returns 200 without sending when the honeypot is filled", async () => {
-    await expectResponse(await post(JSON.stringify({ ...valid, company: "bot" })), 200, { ok: true });
+    await expectResponse(await post(JSON.stringify({ ...valid, [HONEYPOT_FIELD]: "bot" })), 200, { ok: true });
     expect(send).not.toHaveBeenCalled();
   });
 
