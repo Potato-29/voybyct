@@ -12,15 +12,24 @@ export default function ActionBar() {
 
   return (
     <footer className={styles.bar}>
-      <button type="button" className={styles.action} onClick={() => setContactOpen(true)}>
-        Get in touch
-        <Image className={styles.arrow} src={arrow} alt="" />
-      </button>
+      {site.contactFormEnabled ? (
+        <button type="button" className={styles.action} onClick={() => setContactOpen(true)}>
+          Get in touch
+          <Image className={styles.arrow} src={arrow} alt="" />
+        </button>
+      ) : (
+        <a className={styles.action} href={`mailto:${site.email}`}>
+          Get in touch
+          <Image className={styles.arrow} src={arrow} alt="" />
+        </a>
+      )}
       <a className={styles.action} href={`mailto:${site.email}`}>
         check out our work
         <Image className={styles.arrow} src={arrow} alt="" />
       </a>
-      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      {site.contactFormEnabled && (
+        <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      )}
     </footer>
   );
 }

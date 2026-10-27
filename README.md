@@ -39,6 +39,10 @@ Design source: Figma file `ibQ44dnSfDhARHzcwV1ywO`, frame "Landing Page".
 
 ## Contact form
 
+The form is behind a feature flag. Unless `NEXT_PUBLIC_CONTACT_FORM_ENABLED=true` is set
+at build time, "Get in touch" opens an email to the studio (`site.email` in `lib/site.ts`)
+instead of the form.
+
 The form posts to `/api/contact`, which validates the input and calls
 `sendContactMessage()` in `lib/contact.ts`. Delivery is **not connected yet**: until it is,
 the endpoint responds 503 and the form tells visitors to email the studio instead.
@@ -48,6 +52,7 @@ To enable it:
 1. Implement delivery inside `sendContactMessage()` (for example with [Resend](https://resend.com)).
 2. Set the environment variables from `.env.example` (`CONTACT_TO_EMAIL`, `RESEND_API_KEY`)
    locally in `.env.local` and in the Vercel project settings.
+3. Set `NEXT_PUBLIC_CONTACT_FORM_ENABLED=true` and redeploy.
 
 ## Placeholders to replace
 
