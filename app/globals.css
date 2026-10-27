@@ -1,3 +1,26 @@
+:root {
+  /* Colors (from Figma) */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-text-muted: #676767;
+  --color-accent: #f74203;
+
+  /* Typography. --font-body is set by next/font in app/layout.tsx. */
+  --font-display: var(--font-body);
+
+  /* Layout */
+  --ticker-height: 26px;
+  --actionbar-height: 44px;
+  --gutter: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --actionbar-height: 33px;
+    --gutter: 40px;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -10,6 +33,13 @@ body {
   padding: 0;
 }
 
+body {
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -17,4 +47,16 @@ img {
 
 button {
   font: inherit;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
