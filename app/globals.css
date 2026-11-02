@@ -11,14 +11,23 @@
 
   /* Layout */
   --ticker-height: 26px;
-  --actionbar-height: 52px;
+  --actionbar-height: 33px;
   --gutter: 16px;
+
+  /* Mobile/tablet: one pixel of the 402px-wide mobile Figma frame. Capped so
+     tablets don't blow the layout up. */
+  --m: calc(min(100vw, 480px) / 402);
 }
 
 @media (min-width: 768px) {
   :root {
-    --actionbar-height: 40px;
     --gutter: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --actionbar-height: 40px;
   }
 }
 

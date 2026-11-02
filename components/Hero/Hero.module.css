@@ -1,38 +1,21 @@
-/* Mobile/tablet: stacked layout. */
 .hero {
   position: relative;
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
   color: var(--color-white);
 }
 
 .media {
   position: absolute;
   inset: 0;
+  overflow: hidden;
 }
 
 .background {
-  object-fit: cover;
-  /* Keep the portal and figures in view (they sit ~48% across, ~62% down the image). */
-  object-position: 48% 70%;
-}
-
-.content {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 32px var(--gutter);
+  position: absolute;
+  max-width: none;
 }
 
 .wordmark {
   margin: 0;
-  width: min(160px, 45vw);
 }
 
 .wordmark img {
@@ -42,16 +25,56 @@
 
 .tagline {
   margin: 0;
-  font-size: 13px;
-  letter-spacing: 0.35em;
   text-transform: uppercase;
   text-align: center;
 }
 
-.strip {
-  position: relative;
-  width: 100%;
-  height: auto;
+/* Mobile/tablet: matches the 402px-wide Figma frame (iPhone 17). --m is one Figma
+   pixel; the hero takes whatever height is left between the ticker and the About block. */
+@media (max-width: 1023.98px) {
+  .hero {
+    flex: 1;
+    min-height: 0;
+    /* Lets the image crop below scale with the hero's height (cqh). */
+    container-type: size;
+  }
+
+  /* Figma crop: the scene is 143.21% of the hero's height, starts 22.79% above it and
+     is centred 11.74% of the hero's height left of the middle. */
+  .background {
+    top: -22.79%;
+    left: calc(50% - 11.74cqh);
+    width: auto;
+    height: 143.21%;
+    transform: translateX(-50%);
+  }
+
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(57 * var(--m)) 0 calc(52 * var(--m));
+  }
+
+  .wordmark {
+    width: calc(274 * var(--m));
+  }
+
+  .tagline {
+    order: -1;
+    font-size: calc(12 * var(--m));
+    line-height: 1.33;
+    letter-spacing: 0.57em;
+    /* Balances the tracking CSS adds after the last letter, so the text stays centred. */
+    padding-left: 0.57em;
+  }
+
+  .strip {
+    display: none;
+  }
 }
 
 /* Desktop: positioned to match the 1200px Figma frame. --u is one Figma pixel. */
@@ -60,28 +83,31 @@
     --u: calc(100cqw / 1200);
     position: absolute;
     inset: 0 0 calc(9 * var(--u)) 0;
-    min-height: 0;
-  }
-
-  /* The wide image fills the band above the white strip; the colour behind the
-     strip (seen through its V cutout) continues the image's bottom edge. */
-  .hero {
+    /* The colour behind the strip (seen through its V cutout) continues the
+       wide image's bottom edge. */
     background: #70060b;
   }
 
+  /* The wide image fills the band above the white strip. */
   .media {
     bottom: calc(201 * var(--u));
   }
 
   .background {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     object-position: 50% 100%;
   }
 
   .content {
     position: absolute;
     inset: 0 0 calc(201 * var(--u)) 0;
-    flex-direction: row;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 20px;
     padding: 0 calc(100 * var(--u)) 0 calc(103 * var(--u));
   }
 
@@ -91,6 +117,7 @@
 
   .tagline {
     font-size: max(12px, calc(14 * var(--u)));
+    letter-spacing: 0.35em;
   }
 
   .strip {
@@ -98,5 +125,7 @@
     /* Overlap by 1px so sub-pixel rounding never shows a sliver of the hero below. */
     bottom: -1px;
     left: 0;
+    width: 100%;
+    height: auto;
   }
 }
