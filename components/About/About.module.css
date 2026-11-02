@@ -1,23 +1,36 @@
-/* Mobile/tablet: flows below the hero. */
-.about {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px var(--gutter) 32px;
-}
-
 .description {
   margin: 0;
-  max-width: 34em;
   color: var(--color-text-muted);
-  font-size: 13px;
   line-height: 1.33;
+  text-align: justify;
   text-transform: lowercase;
 }
 
 .symbols {
-  width: 113px;
   height: auto;
+}
+
+/* Mobile/tablet: the white block below the hero, matching the 402px Figma frame.
+   --m is one Figma pixel. */
+@media (max-width: 1023.98px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(331 * var(--m));
+    padding: calc(54 * var(--m)) calc((100vw - 274 * var(--m)) / 2) calc(45 * var(--m));
+  }
+
+  .description {
+    font-size: calc(14 * var(--m));
+    /* Figma rounds 133% of 14px to a 19px line. */
+    line-height: calc(19 * var(--m));
+  }
+
+  .symbols {
+    align-self: flex-end;
+    margin-top: auto;
+    width: calc(113 * var(--m));
+  }
 }
 
 /* Desktop: overlaid on the white strip, matching the Figma frame. */
@@ -26,7 +39,6 @@
     --u: calc(100cqw / 1200);
     position: absolute;
     inset: 0;
-    padding: 0;
     pointer-events: none;
   }
 
@@ -35,9 +47,7 @@
     left: calc(111 * var(--u));
     bottom: calc(28 * var(--u));
     width: calc(412 * var(--u));
-    max-width: none;
     font-size: max(10px, calc(10 * var(--u)));
-    text-align: justify;
     pointer-events: auto;
   }
 

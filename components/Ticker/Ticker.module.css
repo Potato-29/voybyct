@@ -25,6 +25,13 @@
   white-space: nowrap;
 }
 
+/* Mobile/tablet: the Figma ticker text style is 10px. */
+@media (max-width: 1023.98px) {
+  .item {
+    font-size: 10px;
+  }
+}
+
 @keyframes scroll {
   from {
     transform: translateX(0);

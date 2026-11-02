@@ -46,6 +46,28 @@
   transform: translate(2px, 2px);
 }
 
+/* Mobile/tablet: matches the 402px Figma frame. */
+@media (max-width: 1023.98px) {
+  /* The Figma frame places the labels at fixed offsets rather than centring them. */
+  .action {
+    justify-content: flex-start;
+    gap: 0;
+    padding: 0 0 0 calc(44 * var(--m));
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+
+  .action + .action {
+    padding-left: calc(37 * var(--m));
+  }
+
+  .arrow {
+    width: 18px;
+    height: 18px;
+    margin-left: calc(2 * var(--m));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .arrow {
     transition: none;

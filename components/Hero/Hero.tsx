@@ -6,7 +6,8 @@ import wordmark from "@/public/images/wordmark.png";
 import styles from "./Hero.module.css";
 
 // Desktop shows a wide crop sized to the band above the white strip; smaller
-// screens show the full scene. Must match the 1024px breakpoint in Hero.module.css.
+// screens crop the full scene as in the mobile Figma frame. Must match the 1024px
+// breakpoint in Hero.module.css, which also sizes and positions the image.
 const DESKTOP_MEDIA = "(min-width: 1024px)";
 
 export default function Hero() {
@@ -15,7 +16,6 @@ export default function Hero() {
   const { props: imgProps } = getImageProps({
     src: heroImage,
     alt: "",
-    fill: true,
     priority: true,
     unoptimized: true,
   });
